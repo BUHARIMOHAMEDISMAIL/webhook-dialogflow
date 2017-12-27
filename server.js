@@ -24,17 +24,13 @@ app.post('/jobpost', function (req, result) {
     var joblocation = req.body.result.parameters['joblocation'];  //last update
     var options = {
       "method": "GET",
-      // "hostname": "fmw.uat.ust-global.com",
       "hostname": "ustbotsearch.search.windows.net",
       "port": null,
-      "path": "/indexes/ijp-index/docs?api-version=2016-09-01&%24filter=Is_Posted_Externally%C2%A0eq%20'Yes'%20and%20Current_Status%20eq%20'Sourcing'&querytype=full&%24top=15&search=Location_Level1%3A%22" + joblocation + "%22%20Location_Level2%3A%22" + joblocation + "%22%20Location_Level3%3A%22" + joblocation + "%22%20Location_Level4%3A%22" + joblocation + "%22%20Title%3A%22%22%20UST_PRIMARY_COMPETENCY%3A%22" + technology + "%22",
-      //"path": "/indexes/ijp-index/docs?api-version=2016-09-01&%24filter=Is_Posted_Externally%C2%A0eq%20'Yes'%20and%20Current_Status%20eq%20'Sourcing'&querytype=full&%24top=15&search=Location_Level1%3A%22chennai%22%20Location_Level2%3A%22chennai%22%20Location_Level3%3A%22chennai%22%20Location_Level4%3A%22chennai%22%20Title%3A%22%22%20UST_PRIMARY_COMPETENCY%3A%22java%22",  --azure working with chennai location
-      //"path": "/osb/USTJobProfileIntegration/FetchJR?consumer=ChatBot&location="+joblocation+"&role=&skillSet="+technology+"&jobPosting=EJP",
-      //"path": "/osb/USTJobProfileIntegration/FetchJR?consumer=ChatBot&location=chennai&role=&skillSet=&jobPosting=EJP",
+      // "path": "/indexes/ijp-index/docs?api-version=2016-09-01&%24filter=Is_Posted_Externally%C2%A0eq%20'Yes'%20and%20Current_Status%20eq%20'Sourcing'&querytype=full&%24top=15&search=Location_Level1%3A%22" + joblocation + "%22%20Location_Level2%3A%22" + joblocation + "%22%20Location_Level3%3A%22" + joblocation + "%22%20Location_Level4%3A%22" + joblocation + "%22%20Title%3A%22%22%20UST_PRIMARY_COMPETENCY%3A%22" + technology + "%22",
+      "path": "/indexes/ijp-index/docs?api-version=2016-09-01&%24filter=JobPostingExternal%C2%A0eq%20'YES'%20&querytype=full&%24top=50&search=Title%3A%22%22%20PrimarySkill%3A(%22" + technology + "%22)%20Primarylocation%3A%22" + joblocation + "%22%20Country%3A%22" + joblocation + "%22%20State%3A%22" + joblocation + "%22",
       "headers": {
-        "content-type": "application/json",
+        "content-type": "application/json; charset=utf-8",
         "api-key": "1AF2593D94137D72051204F97E0BDC14"
-        //"authorization": "Basic Q2hhdGJvdDpjaGF0Ym90QDEyMw=="
       }
     };
     http.get(options, res => {
@@ -65,10 +61,8 @@ app.post('/jobpost', function (req, result) {
       // "hostname": "fmw.uat.ust-global.com",
       "hostname": "ustbotsearch.search.windows.net",
       "port": null,
-      "path": "/indexes/ijp-index/docs?api-version=2016-09-01&%24filter=Is_Posted_Externally%20eq%20'Yes'%20and%20Current_Status%20eq%20'Sourcing'%20and%20search.ismatch('%22" + jobdett + "%22'%2C'id')",
-      //"path": "/indexes/ijp-index/docs?api-version=2016-09-01&%24filter=Is_Posted_Externally%C2%A0eq%20'Yes'%20and%20Current_Status%20eq%20'Sourcing'&querytype=full&%24top=15&search=Location_Level1%3A%22chennai%22%20Location_Level2%3A%22chennai%22%20Location_Level3%3A%22chennai%22%20Location_Level4%3A%22chennai%22%20Title%3A%22%22%20UST_PRIMARY_COMPETENCY%3A%22java%22",  --azure working with chennai location
-      //"path": "/osb/USTJobProfileIntegration/FetchJR?consumer=ChatBot&location="+joblocation+"&role=&skillSet="+technology+"&jobPosting=EJP",
-      //"path": "/osb/USTJobProfileIntegration/FetchJR?consumer=ChatBot&location=chennai&role=&skillSet=&jobPosting=EJP",
+      // "path": "/indexes/ijp-index/docs?api-version=2016-09-01&%24filter=Is_Posted_Externally%20eq%20'Yes'%20and%20Current_Status%20eq%20'Sourcing'%20and%20search.ismatch('%22" + jobdett + "%22'%2C'id')",
+      "path": "/indexes/ijp-index/docs?api-version=2016-09-01&%24filter=JobPostingExternal%20eq%20'YES'%20and%20search.ismatch('%22" + jobdett + "%22'%2C'id')",
       "headers": {
         "content-type": "application/json",
         "api-key": "1AF2593D94137D72051204F97E0BDC14"
